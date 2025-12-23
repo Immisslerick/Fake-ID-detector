@@ -1,36 +1,39 @@
 # PAN Card Tampering Detection (Educational Project)
 
-Detect potential tampering in PAN card images using basic computer vision / ML-style checks (e.g., comparing key regions, flagging suspicious edits, and generating a “tampered vs. untampered” style result).
+Detects potential tampering in PAN card images using basic computer vision checks (e.g., alignment + difference scoring + highlighting suspicious regions).
 
-> **Note:** This is an educational project to learn image preprocessing, feature extraction, and simple classification logic. It is **not** production-grade identity verification.
+> **Disclaimer:** Educational/demo project only. Not production identity verification.
 
----
+## Demo (recommended)
+- Add 1–2 screenshots/GIFs here:
+  - Original vs Suspected
+  - Output with highlighted differences + score
 
-## What this project does
-- Loads two images (an “original/reference” and a “suspected” PAN card image)
-- Preprocesses images (resize, grayscale, noise reduction as needed)
-- Compares image regions to detect differences that may indicate edits/tampering
-- Outputs:
-  - a tamper score / similarity score (if implemented)
-  - a classification result (tampered / not tampered)
-  - optional visual outputs (difference map / highlighted areas)
+## How it works (high level)
+1. Load **reference** image and **suspected** image  
+2. Preprocess (resize, grayscale, blur/denoise)
+3. Align images (optional but strongly recommended)
+4. Compute difference map + similarity score (e.g., SSIM or pixel diff)
+5. Threshold + contour detection to highlight changed regions
+6. Output score + “tampered / not tampered” decision
 
----
-
-## Why I built it
-I wanted a hands-on project that combines:
-- image preprocessing and normalization
-- detecting meaningful differences vs. noise
-- building an end-to-end script that produces an interpretable result
-
----
-
-## Tech stack
+## Tech Stack
 - Python
-- OpenCV (`cv2`)
+- OpenCV (cv2)
 - NumPy
-- (Optional) scikit-learn for classification, if included
+- (Optional) scikit-image for SSIM
+- (Optional) scikit-learn for classification
 
----
+## Project Structure
+pancard-tampering-main/
+  app.py (or main.py)
+  utils/
+  sample_data/
+  requirements.txt
+  README.md
 
-## Project structure
+## Setup
+```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+pip install -r requirements.txt
